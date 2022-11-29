@@ -1,4 +1,4 @@
-# Xharacteristics-Of-Chess-Players
+# Characteristics-Of-Chess-Players
 
 The aim of our study was to identify the statistical chess player and to find what characterises the best players. Data
 We collected data using a questionnaire we had created and shared with
