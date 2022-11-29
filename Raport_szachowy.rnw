@@ -1,0 +1,328 @@
+\documentclass[12pt, a4paper, titlepage]{report} 
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{polski}
+\usepackage{hyperref}
+\usepackage{indentfirst}
+\hyphenpenalty=5000
+\tolerance=5000
+\linespread{1.3}
+
+\author{Maciej Karawan, Paweł Stelmasik}
+\title{Charakterystyka szachistów}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{Wstęp}
+
+
+Celem przeprowadzonego przez nas badania było określenie statystycznego gracza w szachy oraz znalezienie czym charakteryzują się najlepsi. Dane zbieraliśmy za pomocą stworzonej przez nas ankiety, którą udostępniliśmy m.in. na grupie “Szachawka”, zrzeszającej szachistów na Facebooku z której dostaliśmy najwięcej odpowiedzi. Ankietę udostępniliśmy również na forum szachowym pod adresem szachowe.pl oraz wśród naszych znajomych szachistów.  
+Uzyskaliśmy łącznie 249 odpowiedzi na naszą ankietę. 
+\\
+Zmienne: 
+\begin{enumerate}
+
+\item \textbf{Płeć}, zmienna jakościowa nieuporządkowana. 
+
+\item \textbf{Wiek}, zmienna ilościowa.
+
+\item \textbf{Wielkość zamieszkiwanej miejscowości}, zmienna jakościowa uporządkowana. 
+
+\item \textbf{Wykształcenie}, zmienna jakościowa uporządkowana. 
+
+\item \textbf{Zawód}, zmienna jakościowa nieuporządkowana. 
+
+\item \textbf{Geneza zainteresowania}, zmienna jakościowa nieuporządkowana. 
+
+\item \textbf{Staż w szachach}, zmienna liczbowa ciągła (liczona w latach).  
+
+\item \textbf{Częstotliwość gry w szachy}, zmienna jakościowa uporządkowana.
+
+\item \textbf{Sposób gry w szachy (na żywo czy przez internet)}, zmienna jakościowa nieuporządkowana. 
+
+\item \textbf{Rodzaj platformy do gry w szachy}, zmienna jakościowa nieuporządkowana.
+
+\item \textbf{Ranking na chess.com}, zmienna liczbowa, zakres od 0 do ~3500. 
+
+\item \textbf{Ranking na liches.org}, zmienna liczbowa, zakres od 0 do ~3500. 
+
+\item \textbf{Preferowana długość partii}, zmienna jakościowa uporządkowana.
+
+\item \textbf{Rodzaj kategorii szachowej}, zmienna jakościowa uporządkowana. 
+
+\item \textbf{Ulubione otwarcie}, zmienna jakościowa nieuporządkowana. 
+
+\item \textbf{Ulubiony szachista}, zmienna jakościowa nieuporządkowana. 
+
+\item \textbf{Figurowanie w rankingu FIDE}, zmienna logiczna. 
+
+\item \textbf{Ranking FIDE}, zmienna liczbowa, zakres od 1000 do 2900.
+\end{enumerate}
+
+\section*{Przedstawienie danych i analiza}
+\subsection*{Obraz grupy badawczej}
+Na początku chcielibyśmy przedstawić naszą grupę badawczą. Największy odzew na naszą ankietę dostaliśmy na grupie facebookowej \ppauza "Szachawka", ciężko określić jaką część wyników stanowią odpowiedzi z tej grupy, wg naszych oszacowań(!) jest  to około 75\%. Nasze wyniki stanowią opis zawodników szachowych przede wszystkim młodego pokolenia, więc nie są miarodajnym opisem ogólnego przekroju wszystkich szachistów.
+\\
+Na pierwszym wykresie jest pokazany procent płci wśród osób ankietowanych. Jak łatwo zauważyć przeważającą część stanowią mężczyźni, bo aż 88\%. Kobiety to około 11\% wszystkich badanych.
+\begin{center}
+<<płeć, echo = FALSE, warning = FALSE, message = FALSE, fig.height = 4, fig.width = 4>>=
+library("ggplot2")
+library("tidyverse")
+baza <- read.table("C:/Users/krulp/Desktop/baza_szachy", header = TRUE, sep = "/", dec = ",")
+ggplot(baza, aes(x="", fill = Płeć)) + geom_bar() + xlab("") + ylab("") + coord_polar("y", start = 0) +theme_void() + labs(title = "Podział graczy ze względu na płeć", caption = "Wykres nr 1")
+@
+\end{center}
+\label{wyk:jeden}
+
+W znacznej większości są to ludzie młodzi, średnia wieku to około 20 lat, a mediana wynosi 19 lat. Najmłodszy uczestnik grupy badawczej ma 13, a najstarszy 96 lat. Wiek grupy wpływa na wykonywany aktualnie zawód, ponad 200 z 249 ankietowanych deklaruje się jako uczniowie lub 
+studenci.
+\begin{center}
+<<wiek, echo = FALSE, warning = FALSE, message = FALSE, fig.height = 5, fig.width = 5>>=
+ggplot(baza, aes(x = Wiek))+
+  geom_histogram(color = "black", fill = "lightblue", binwidth = 1) + xlim(10,60) + ylim(0, 35) +
+  ylab("Ilość osób") + theme_minimal() + labs(title = "Podział graczy ze względu na wiek", caption = "Wykres nr 2") 
+@
+\end{center}
+\label{wyk:dwa}
+
+Wpływ na rozpoczęcie przygody z szachami w największym stopniu ma rodzina oraz znajomi (ponad 50\%), następnie książki, koła szachowe oraz twórcy na YouTube. Połowa badanych osób to nowi zawodnicy (mediana na poziomie dwóch lat), a średnia arytmetyczna stażu w szachach jest równa pięć i pół roku.
+\begin{center}
+<<staż, echo = FALSE, warning = FALSE, message = FALSE, fig.height = 5, fig.width = 5>>=
+
+ggplot(baza, aes(x = Od.ilu.lat.grasz.w.szachy.)) + geom_density(fill = "lightblue", color = "lightblue") + theme_minimal() + ylab("Gęstość") + xlab("Staż w szachach") + labs(title = "Podział graczy ze względu na staż", caption = "Wykres nr 3")
+
+@
+\end{center}
+\label{wyk:trzy}
+
+Lwia część badanych osób to stali gracze, bo aż 85\% osób deklaruje codzienną grę lub przynajmniej kilka razy w tygodniu. Natomiast rzadziej niż kilka razy miesięcznie gra mniej niż 5\% osób. Wyłącznie przez internet gra prawie 80 \%, a około 9 \% osób wyłącznie na żywo. Pozostałe 11 \% korzysta z obu sposobów rozgrywki . Najpopularniejszą platformą do gry w szachy jest  Chess.com, niedaleko w tyle jest Lichess.org, inne platformy mają już zdecydowanie mniejszy udział. Warto tutaj wspomnieć o platformie kurnik.pl, którą część ze starszych szachistów traktuje z sentymentem.\\
+Przechodzimy teraz do rankingów które wyznaczają poziom zaawansowania zawodnika. Zaczynając od rankingów na platformach szachowych, które służą do dobierania przeciwników o podobnych umiejętnościach. W zależności od strony, wyniki rankingu mogą się trochę różnić, nie mniej jednak są one do siebie zbliżone.Uzyskaliśmy 186 wyników rankingu na "Chess.com" oraz 155 na "Lichess.org", natomiast średnia i mediana to odpowiednio 1178 i 1100 dla chess.com oraz 1584 i 1500 na lichess.org. Ranking FIDE (Fédération Internationale des Échecs) jest najbardziej prestiżowym i profesjonalnym rankingiem szachowym,posiada go  mniej niż 15\% osób, a kategorie szachową, posiada jednie 20\% ankietowanych. Najlepszy szachista wypełniający ankietę legitymuje się rankingiem ponad 2500 elo, natomiast mediana jest na poziome 1580, a średnia arytmetyczna wynosi 1569. Wynik ponad 2500 elo jest bardzo imponujący, szczególnie iż ranking mistrza świata Magnusa Carlsena  wynosi 2847, a najlepszego obecnie polskiego szachisty Jana Krzysztofa Dudy odpowiednio 2729. 
+\\\\
+\begin{center}
+\begin{minipage}{6 cm}
+<<ranking_i, echo = FALSE, warning = FALSE, message = FALSE, fig.height = 5, fig.width = 5>>=
+ggplot(baza, aes((Ranking_Chess.com + Ranking_Lichess.org)/2)) + geom_histogram(fill = "lightblue", color = "black", binwidth = 100) + labs(title = "Podział graczy ze względu na ranking", subtitle = "Średnia rankingów z obu platform internetowych", caption = "Wykres nr 4") + xlab("Wartość rankingu") + ylab("Ilość") 
+
+@
+\end{minipage}
+\begin{minipage}{6 cm}
+
+<<ranking_f, echo = FALSE, warning = FALSE, message = FALSE, fig.height = 5, fig.width = 5>>=
+
+ggplot(baza, aes(Ranking_FIDE)) + geom_histogram(fill = "lightblue", color = "black", binwidth = 75) + labs(title = "Podział graczy ze względu na ranking", subtitle = "Ranking FIDE", caption = "Wykres nr 5") + xlab("Wartość rankingu") + ylab("Ilość") 
+
+@
+\end{minipage}
+\end{center}
+
+\subsection*{Analiza i tendencje}
+Przejdźmy teraz do znalezienia pewnych tendencji. Na poniższym wykresie zestawiliśmy wartość rankingu na platformie Chess.com z podanym ulubionym szachistą. Możemy łatwo zauważyć że średnio najwyższy poziom w rankingu mają fani Michaiła Botwinika. Z drugiej strony fani Mieczysława Najdorfa mają średnio najmniejszą wartość rankingu.
+
+<< echo=FALSE, warning=FALSE, message=FALSE, fig.height = 5, fig.width = 7>>=
+
+ulub <-baza %>%
+   select("Ranking_Chess.com","Ulubiony.szachista") %>%
+   filter(Ranking_Chess.com >= 1) %>%
+   group_by(Ulubiony.szachista) %>%
+   summarize(Średni_ranking= mean(Ranking_Chess.com))        
+lista <- baza %>%
+  select("Ulubiony.szachista") %>%
+  group_by(Ulubiony.szachista) %>%
+  count() %>%
+  arrange()
+ 
+y <- data.frame(lista)[c(3:8,10:14,16,17,18,19,21,22,24:30,32:38),]
+x<- data.frame(ulub)[c(3:17,19,20,22:34),]
+
+y <- y[-21,]
+
+z<- data.frame(x,y)
+z <- z[,2:4]
+names(z) <- c("Średni_ranking","Ulubiony.szachista.1", "ilość_osób")
+ggplot(z, aes(Ulubiony.szachista.1, Średni_ranking, color = ilość_osób, size = ilość_osób))+ labs(title = "Średni ranking osób mających wspólnego ulubionego szachistę", caption = "Wykres nr 6") + theme_linedraw(base_line_size = 1) +
+  geom_point(color = "darkblue") + 
+  ylim(0,3000)+ xlab("Ulubiony szachista") + ylab("Średni ranking") + coord_flip()  
+  
+@
+\\
+Przeanalizujmy zależności pomiędzy wartością rankingu na platformie "Chess.com", a częstotliwością gry i treningów z podziałem na płeć. Nie widać tu żadnych ciekawych korelacji, ranking nie zależy w takim stopniu do częstości partii i treningów jakby mogło się wydawać. Godna zauważenia jest dysproporcja w rankingu pomiędzy dwoma płciami, wśród osób które grają okazjonalnie. Różnica w tej kategorii pomiędzy kobietami, a mężczyznami to około 700 punktów rankingowych. Należy jednak pamiętać że bardzo mało kobiet odpowiedziało na naszą ankietę w porównaniu do mężczyzn, więc wykres ten nie jest warunkiem dostatecznym do wyciągania jakichkolwiek wniosków.
+
+<< echo=FALSE, warning=FALSE, message=FALSE, fig.height = 4.5, fig.width = 8>>=
+
+ankieta4 <- baza %>%
+  select("Płeć", "Ranking_Chess.com", "Jak.często.przeznaczasz.swój.czas.na.szachy.")%>%
+  filter(Ranking_Chess.com >= 1) %>%
+  group_by(Płeć, Jak.często.przeznaczasz.swój.czas.na.szachy.) %>%
+  summarise(Ranking=mean(Ranking_Chess.com))
+ankieta4<- ankieta4[c(2,3,4,5,6,8,9,10),1:3]
+ggplot(ankieta4, aes(Jak.często.przeznaczasz.swój.czas.na.szachy.,Ranking, fill = Płeć))+
+  geom_col(position = "dodge") +
+  ylim(0,1500)+
+  labs(title  = "Średni ranking na podstawie czestotliwośći gry w szach u obu płci", caption = "Wykres nr 7")+
+  xlab("Częstotliwość gry w szachy") + theme_minimal()
+@
+
+Na kolejnym z przedstawionych wykresów, zestawiony został   średni ranking osób w tym samym wieku  na platformach "chess.com" oraz "liches.org" z ich wiekiem. Kolorowe linie przedstawiają średni ranking całej badanej grupy na tych platformach. Na pierwszy rzut oka widać, że różnice wartości miedzy platformami wynoszą około 200 punktów. Z wykresu nie wynika iż wiek ma wpływ na ranking, ale można zaobserwować trend, iż dla starszych osób ranking nieznacznie wzrasta. Prawdopodobną przyczyną tego zjawiska jest fakt, że wiekszość osób zaczyna grać w młodośći i wtedy naturalnie są na najniższym poziomie.
+\\
+\\
+<< echo=FALSE, warning=FALSE, message=FALSE, fig.height = 3, fig.width = 6.5>>=
+
+ankieta1 <- baza 
+ankieta3 <- ankieta1 %>%
+  select("Ranking_Chess.com","Wiek") %>%
+  filter(Ranking_Chess.com >= 1) %>%
+  group_by(Wiek) %>%
+  summarise(Ranking=mean(Ranking_Chess.com))
+
+ankieta6 <- ankieta1 %>%
+  select("Ranking_Lichess.org","Wiek") %>%
+  filter(Ranking_Lichess.org >= 1) %>%
+  group_by(Wiek) %>%
+  summarise(Ranking=mean(Ranking_Lichess.org))
+
+
+ 
+z<-data.frame(ankieta6)[c(2:21),]
+
+x <- c(rep("chess.com",20),rep("liches.org",20))
+
+x <- matrix(x)
+x -> platforma
+y<-rbind(ankieta3,z)
+ankieta7<- cbind(platforma,y)
+
+ggplot(ankieta7, aes(Wiek,Ranking,color = platforma))+
+  geom_point()+
+  ylim(0,2500)+
+  xlim(10,40)+
+  geom_hline(yintercept = mean(ankieta1$Ranking_Chess.com, na.rm = T), color = "chocolate")+
+  geom_hline(yintercept = mean(ankieta1$Ranking_Lichess.org, na.rm = T), color = "cadetblue4")+
+  labs(title ="Wiek a ranking szachowy na lichess.org oraz chess.com", caption = "Wykres nr 8" )
+
+
+
+
+@
+\\
+Ostatni wykres przedstawia zależność między rankingiem szachowym na platformie chess.com a wykształceniem. Możemy zauważyć, iż to jakie ktoś posiada wykształcenie ma wpływ na ranking. Osoby deklarujące wyższe wykształcenie mają ranking średnio o 400 punktów większy, natomiast osoby deklarujące wykształcenie średnie/licealne oraz gimnazjalne legitymują się bardzo zbliżonym rankingiem na poziomie około 1100 punktów. 
+\\\\
+<< echo=FALSE, warning=FALSE, message=FALSE, fig.height = 4, fig.width = 6.5>>=
+p1 <- baza %>% 
+ select("Ranking_Chess.com","Wykształcenie") %>%
+ filter(Ranking_Chess.com >= 1) %>%
+ group_by(Wykształcenie) %>% 
+ summarize(Średni_ranking= mean(Ranking_Chess.com)) %>%
+ arrange(desc(Średni_ranking))
+
+ggplot(p1, aes(Wykształcenie, Średni_ranking))+
+  geom_col(color = "black", fill = "lightblue")+
+  ylim(0,1500)+
+  labs(title  = "Wykształcenie a ranking na chess.com", caption = "Wykres nr 9"  )
+
+@
+\\
+
+
+
+
+\subsection*{Podsumowanie}
+Celem przeprowadzonego przez nas badania było określenie statystycznego gracza w szachy oraz znalezienie czym charakteryzują się najlepsi. Cel ten udało się zrealizować połowicznie, ponieważ zebrane dane dały nam obraz szachistów jako grupy, jednak nie udało się nam znaleźć żadnych wzorców widocznych przy najlepszych szachistach. Gra królewska jest zdominowana przez mężczyzn i mimo iż ścisła szachowa czołówka jest jednolita płciowo to nie można powiedzieć, że płeć wpływa na odnoszone wyniki tak jak dzieje się to w innych sportach. W szachy ludzie grają niezależnie od wieku i znów nie ma on wpływu na poziom szachistów. Jednakże wykształcenie implikuje pewne trendy. Dla osób z wykształceniem wyższym średni ranking na platformie chess.com jest istotnie większy od osób deklarujących inne wykształcenie. Istotne, aby zaznaczyć, że badanie zdeterminował sposób zbierania wyników. Najwięcej problemu sprawiła nam praca przy pytaniu o ulubionego szachistę oraz debiut i normalizacja zebranych danych. Przy pracy z danymi dało się odnieść wrażenie, że zebrane informacje są niekiedy skrajne, problem ten mógł by być rozwiązany po przez zwiększenie grupy badawczej, pomogło by to zebrać pełniejsze wyniki i wyciągnąć ciekawsze wnioski. 
+\end{document}
+
+
+<<>>=
+install.packages("tidyverse")
+library("tidyverse")
+library("ggplot2")
+
+ankieta <-  read.csv(file = "C:/Users/Wavliński/Desktop/R/source/Ankieta dotycząca osób grających w szachy1.csv",quote = "'", na.strings = c("Brak", "-", "Nie mam",""), dec = ",")
+str(ankieta)
+head(ankieta)
+colnames(ankieta1)
+ankieta1 <-ankieta %>%
+  select("Płeć","Wiek","Populacja.miejscowości.w.której.mieszkasz","Wykształcenie","Zawód","Inny.zawód..jaki..","W.jaki.sposób.zacząłeś.zaczęłaś.się.interesować.szachami.","Od.ilu.lat.grasz.w.szachy.","Jak.często.przeznaczasz.swój.czas.na.szachy.","Jak.zazwyczaj.grasz.w.szachy.","Na.jakich.platformach.online.rozgrywasz.partie.","Inna.platforma..jaka..","Wpisz.swój.aktualny.ranking.na.platformie.Chess.com","Wpisz.swój.aktualny.ranking.na.platformie.Lichess.org",
+         "Wpisz.swój.aktualny.ranking.na.platformie.Chesstempo.com","Jaką.długość.partii.preferujesz.","Jaką.masz.kategorię.szachową","Ulubione.otwarcie..debiut.","Ulubiony.szachista","Czy.jesteś.klasyfikowany.klasyfikowana.w.rankingu.FIDE.","X.Miejsce.do.wpisania.swojego.rankingu.FIDE.")
+ankieta1 <- ankieta1 %>%
+  rename(Inny_zawód=Inny.zawód..jaki..,Ranking_Chesstempo.com=Wpisz.swój.aktualny.ranking.na.platformie.Chesstempo.com,Ranking_Chess.com=Wpisz.swój.aktualny.ranking.na.platformie.Chess.com,Ranking_Lichess.org=Wpisz.swój.aktualny.ranking.na.platformie.Lichess.org,Ulubiony_debiut=Ulubione.otwarcie..debiut.,)
+ankieta1 <- ankieta1 %>%
+  rename(Ranking_FIDE = X.Miejsce.do.wpisania.swojego.rankingu.FIDE., TAK_NIE_FIDE = Czy.jesteś.klasyfikowany.klasyfikowana.w.rankingu.FIDE.,Platforma = Na.jakich.platformach.online.rozgrywasz.partie.)
+
+
+
+ankieta1[,2] <- as.numeric(ankieta1[,2])
+ankieta1[193,2] <- 18
+ankieta1[190,2] <- 15
+ankieta1[221,2] <- 21
+
+ankieta1[241,19] <- "Michail Tal"
+ankieta1[249,19] <- "Michail Tal"
+ankieta1[96,19] <- "Magnus Carlsen"
+ankieta1[183,19] <- "Hikaru Nakamura"
+ankieta1[199,19] <- "Hikaru Nakamura"
+ankieta1[64,19] <- "Hikaru Nakamura"
+ankieta1[185,19] <- "Hikaru Nakamura"
+ankieta1[231,19] <- "Bartosz Rudecki"
+ankieta1[86,19] <- "Bartosz Rudecki"
+ankieta1[91,19] <- "Bartosz Rudecki"
+ 
+sum(is.na(ankieta1[,2]))
+
+ankieta1$Od.ilu.lat.grasz.w.szachy. <- as.numeric(ankieta1$Od.ilu.lat.grasz.w.szachy.)
+
+length(ankieta1)
+for(i in 1:length(ankieta1$Płeć)){
+  if(is.na(ankieta1[i,]$Od.ilu.lat.grasz.w.szachy.)){
+    ankieta1[i,]$Od.ilu.lat.grasz.w.szachy. <- 1
+  }
+}
+
+for(i in 1:length(ankieta1$Płeć)){
+  if(ankieta1[i,]$TAK_NIE_FIDE == "Tak"){
+    ankieta1[i,]$TAK_NIE_FIDE <- TRUE
+  }else{
+    ankieta1[i,]$TAK_NIE_FIDE <- FALSE
+  }
+}
+
+factor(ankieta1$Jaką.masz.kategorię.szachową, ordered = TRUE, levels = c("Kategoria V","Kategoria IV", "Kategoria III", "Kategoria II", "Kategoria I", "Wyższe tytuły"))
+
+factor(ankieta1$Populacja.miejscowości.w.której.mieszkasz, ordered = TRUE, levels = c("<50.000", "50.000 - 99.999", "100.000 - 249.999", "250.000 - 500.000", ">500.000"))
+
+qplot(ankieta1$Ranking_Chess.com, ankieta1$Jaką.masz.kategorię.szachową)
+
+qplot(ankieta1$Populacja.miejscowości.w.której.mieszkasz, ankieta1$Ranking_Lichess.org)
+
+ranking <- rep(NULL, times = 249)
+for(i in 1:length(ankieta1$Płeć)){
+  ranking[i] <- mean(ankieta1$Ranking_Chess.com + ankieta1$Ranking_Lichess.org, na.rm = TRUE)
+}
+p <- table(ankieta1$Płeć)
+
+ggplot(ankieta1, aes(x="", fill = Płeć)) + geom_bar() + xlab("") + ylab("")
++ coord_polar("y", start = 0) +theme_void() +ggtitle("Podział graczy ze względu na płeć") + geom_text(aes(y = ypos, label = Płeć), color = "white", size=6)
+
+p
+
+
+ggplot(ankieta1, aes(x = Wiek))+
+  geom_histogram()+
+  xlim(10,60)+
+  stat_bin(bins = 18)+
+  ylab("Ilość osób") + theme_minimal() +labs(title = "Podział graczy ze względu na wiek")
+
+
+ggplot(ankieta1, aes(x = Jak.często.przeznaczasz.swój.czas.na.szachy., y = Od.ilu.lat.grasz.w.szachy.)) + geom_boxplot()
+
+ggplot(ankieta1, aes(x = Od.ilu.lat.grasz.w.szachy.)) + geom_density(fill = "lightblue", color = "lightblue") + theme_minimal() + ylab("Gęstość") + xlab("Staż w szachach") + labs(title = "Podział graczy ze względu na staż", caption = "Wykres nr 3")
+
+ggplot(ankieta1, aes(x = Jak.zazwyczaj.grasz.w.szachy., y = Od.ilu.lat.grasz.w.szachy.)) + geom_boxplot()
+
+
+str(ankieta1$Platforma)
+=
+
+
+@
