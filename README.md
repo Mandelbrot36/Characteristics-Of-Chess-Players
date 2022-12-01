@@ -1,7 +1,6 @@
 # Characteristics-Of-Chess-Players
 
-The aim of our study was to identify the statistical chess player and to find what characterises the best players. Data
-We collected data using a questionnaire we had created and shared with
+The aim of our study was to identify the statistical chess player and to find what characterises the best players.
 We collected data using a questionnaire we created, which we shared, among others, on the 'Chessboard' Facebook group, from which we received the most responses.
 We also made the survey available on the
 the chess forum at szachowe.pl and among our friends in the
